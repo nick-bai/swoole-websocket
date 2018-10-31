@@ -7,6 +7,8 @@
  */
 namespace whisper;
 
+use think\Db;
+
 trait EventTrait
 {
     /**

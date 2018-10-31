@@ -102,7 +102,6 @@ class Websocket
             'connections',
         ];
 
-
         if (!isset($argv[1]) || !in_array($argv[1], $availableCommands)) {
             if (isset($argv[1])) {
 
