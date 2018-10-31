@@ -325,7 +325,7 @@ class Websocket
     {
         $this->output->writeln('');
         $this->output->writeln('-----------------------<info> whisper </info>-----------------------');
-        $this->output->writeln('whisper server version: 0.1   php version: ' . PHP_VERSION);
+        $this->output->writeln('whisper server version: ' . $this->config['version'] . '   php version: ' . PHP_VERSION);
         $this->output->writeln('-----------------------<info>  info   </info>-----------------------');
         $this->output->writeln('listen                    worker            status');
         $this->output->writeln('websocket://0.0.0.0:' . $this->config['port'] . '    ' . $this->config['server']['worker_num'] . '                 <info>ok</info>');
