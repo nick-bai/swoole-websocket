@@ -62,4 +62,13 @@ trait EventTrait
 
     }
 
+    /**
+     * http 服务
+     * @param \swoole\http\request $request
+     * @param \swoole\http\response $response
+     */
+    public function onRequest(\swoole\http\request $request, \swoole\http\response $response)
+    {
+        $response->end("<h1>Hello Swoole. #".rand(1000, 9999)."</h1>");
+    }
 }

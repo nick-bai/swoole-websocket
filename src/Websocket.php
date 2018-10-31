@@ -309,6 +309,7 @@ class Websocket
         $this->server->on('WorkerStart', [$this, 'onWorkerStart']);
         $this->server->on('message', [$this, 'onMessage']);
         $this->server->on('close', [$this, 'onClose']);
+        $this->server->on('request', [$this, 'onRequest']);
 
         $this->display();
 
@@ -328,6 +329,7 @@ class Websocket
         $this->output->writeln('-----------------------<info>  info   </info>-----------------------');
         $this->output->writeln('listen                    worker            status');
         $this->output->writeln('websocket://0.0.0.0:' . $this->config['port'] . '    ' . $this->config['server']['worker_num'] . '                 <info>ok</info>');
+        $this->output->writeln('http://127.0.0.1:' . $this->config['port'] . '       ' . $this->config['server']['worker_num'] . '                 <info>ok</info>');
         $this->output->writeln('-------------------------------------------------------');
         $this->output->writeln('');
         $this->output->writeln('Press Ctrl+C to stop. Start success.');
