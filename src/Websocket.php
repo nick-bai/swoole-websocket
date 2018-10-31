@@ -11,6 +11,7 @@ use Inhere\Console\IO\Output;
 use swoole\websocket\server;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use think\Db;
 
 class Websocket
 {
@@ -21,8 +22,6 @@ class Websocket
     private $server;
 
     private $output;
-
-    private $db;
 
     private $log;
 
@@ -47,7 +46,24 @@ class Websocket
                 'daemonize' => 0
             ],
 
-            'port' => 8991
+            'port' => 8991,
+
+            'db' => [
+                // 数据库类型
+                'type'            => 'mysql',
+                // 服务器地址
+                'hostname'        => '127.0.0.1',
+                // 数据库名
+                'database'        => 'whisper',
+                // 用户名
+                'username'        => 'root',
+                // 密码
+                'password'        => 'root',
+                // 端口
+                'hostport'        => '3306',
+                // 数据库编码默认采用utf8
+                'charset'         => 'utf8'
+            ],
         ];
 
         $this->config = $config;
@@ -56,6 +72,8 @@ class Websocket
 
         $this->log = new Logger('whisper_log');
         $this->log->pushHandler(new StreamHandler($this->config['server']['log_file']));
+
+        Db::setConfig($config['db']);
     }
 
     /**
@@ -106,7 +124,7 @@ class Websocket
 
                     $this->output->writeln('');
                     $msg = 'server is running, please run stop or restart if you want to restart server';
-                    $this->output->writeln("<red>' . $msg . '</red>");
+                    $this->output->writeln("<red>" . $msg . "</red>");
                     $this->log->error($msg);
 
                     return false;

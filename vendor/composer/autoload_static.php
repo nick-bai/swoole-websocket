@@ -6,10 +6,18 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit706de157fddc5c0c6c92a0c791f7f4e1
 {
+    public static $files = array (
+        '33197a0023ced5fbf8f861d1c4ca048d' => __DIR__ . '/..' . '/topthink/think-orm/src/config.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'w' => 
         array (
             'whisper\\' => 8,
+        ),
+        't' => 
+        array (
+            'think\\' => 6,
         ),
         'T' => 
         array (
@@ -34,6 +42,10 @@ class ComposerStaticInit706de157fddc5c0c6c92a0c791f7f4e1
         'whisper\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'think\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/topthink/think-orm/src',
         ),
         'Toolkit\\Sys\\' => 
         array (

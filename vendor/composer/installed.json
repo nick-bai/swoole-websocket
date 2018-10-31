@@ -313,5 +313,52 @@
             "php",
             "tool"
         ]
+    },
+    {
+        "name": "topthink/think-orm",
+        "version": "v1.2.13",
+        "version_normalized": "1.2.13.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/top-think/think-orm.git",
+            "reference": "26aad2f9b43e4762fe71f2e16c445aeb59ae80b6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/top-think/think-orm/zipball/26aad2f9b43e4762fe71f2e16c445aeb59ae80b6",
+            "reference": "26aad2f9b43e4762fe71f2e16c445aeb59ae80b6",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "php": ">=5.6.0"
+        },
+        "time": "2018-10-30T06:42:51+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "think\\": "src"
+            },
+            "files": [
+                "src/config.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "liu21st",
+                "email": "liu21st@gmail.com"
+            }
+        ],
+        "description": "think orm"
     }
 ]

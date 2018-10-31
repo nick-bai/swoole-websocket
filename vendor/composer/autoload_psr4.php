@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'whisper\\' => array($baseDir . '/src'),
+    'think\\' => array($vendorDir . '/topthink/think-orm/src'),
     'Toolkit\\Sys\\' => array($vendorDir . '/toolkit/sys-utils/src'),
     'Toolkit\\Cli\\' => array($vendorDir . '/toolkit/cli-utils/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),

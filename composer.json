@@ -1,7 +1,8 @@
 {
     "require": {
         "inhere/console": "^2.4",
-        "monolog/monolog": "^1.23"
+        "monolog/monolog": "^1.23",
+        "topthink/think-orm": "^1.2"
     },
     "autoload": {
         "psr-4": {
