@@ -9,6 +9,8 @@ namespace whisper;
 
 use Inhere\Console\IO\Output;
 use swoole\websocket\server;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 class Websocket
 {
@@ -21,6 +23,8 @@ class Websocket
     private $output;
 
     private $db;
+
+    private $log;
 
     /**
      * 运行服务器
@@ -49,6 +53,9 @@ class Websocket
         $this->config = $config;
 
         $this->output = new Output();
+
+        $this->log = new Logger('whisper_log');
+        $this->log->pushHandler(new StreamHandler($this->config['server']['log_file']));
     }
 
     /**
@@ -80,7 +87,10 @@ class Websocket
 
         if (!isset($argv[1]) || !in_array($argv[1], $availableCommands)) {
             if (isset($argv[1])) {
-                $this->output->writeln('Unknown command: ' . $argv[1]);
+
+                $msg = 'Unknown command: ' . $argv[1];
+                $this->output->writeln($msg);
+                $this->log->error($msg);
             }
 
             $this->helper();
@@ -95,7 +105,10 @@ class Websocket
                 if($this->isRunning()) {
 
                     $this->output->writeln('');
-                    $this->output->writeln("<red>server is running, please run stop or restart if you want to restart server</red>");
+                    $msg = 'server is running, please run stop or restart if you want to restart server';
+                    $this->output->writeln("<red>' . $msg . '</red>");
+                    $this->log->error($msg);
+
                     return false;
                 }
 
@@ -146,7 +159,10 @@ class Websocket
             if (!\swoole\process::kill($pid, 0)) {
 
                 $this->output->writeln('');
-                $this->output->writeln("<red>PID :{$pid} not exist</red>");
+                $msg = "PID :{$pid} not exist";
+                $this->output->writeln("<red>" . $msg . "</red>");
+                $this->log->error($msg);
+
                 return false;
             }
 
@@ -160,7 +176,10 @@ class Websocket
                 if (!\swoole\process::kill($pid, 0)) {
 
                     $this->output->writeln('');
-                    $this->output->writeln("<info>server stop at " . date("Y-m-d H:i:s") . '</info>');
+                    $msg = "server stop at " . date("Y-m-d H:i:s");
+                    $this->output->writeln("<info>" . $msg . "</info>");
+                    $this->log->error($msg);
+
                     if (is_file($pidFile)) {
                         unlink($pidFile);
                     }
@@ -171,7 +190,10 @@ class Websocket
                     if (time() - $time > 5) {
 
                         $this->output->writeln('');
-                        $this->output->writeln("<yellow>stop server fail.try again </yellow>");
+                        $msg = 'stop server fail.try again ';
+                        $this->output->writeln("<yellow>' . $msg . '</yellow>");
+                        $this->log->warning($msg);
+
                         break;
                     }
                 }
@@ -181,7 +203,10 @@ class Websocket
         } else {
 
             $this->output->writeln('');
-            $this->output->writeln("<red>pid 文件不存在，请执行查找主进程pid,kill!</red>");
+            $msg = 'pid 文件不存在，请执行查找主进程pid,kill!';
+            $this->output->writeln("<red>" . $msg . "</red>");
+            $this->log->error($msg);
+
             return false;
         }
     }
@@ -199,19 +224,28 @@ class Websocket
             if (!\swoole\process::kill($pid, 0)) {
 
                 $this->output->writeln('');
-                $this->output->writeln("<red>pid :{$pid} not exist</red>");
+                $msg = "pid :{$pid} not exist";
+                $this->output->writeln("<red>" . $msg . "</red>");
+                $this->log->error($msg);
+
                 return false;
             }
 
             \swoole\process::kill($pid, $sig);
 
             $this->output->writeln('');
-            $this->output->writeln("<info>send server reload command at " . date("Y-m-d H:i:s") . '</info>');
+            $msg = "send server reload command at " . date("Y-m-d H:i:s");
+            $this->output->writeln("<info>" . $msg . "</info>");
+            $this->log->info($msg);
+
             return true;
         } else {
 
             $this->output->writeln('');
-            $this->output->writeln("<red>pid 文件不存在，请执行查找主进程pid,kill!</red>");
+            $msg = 'pid 文件不存在，请执行查找主进程pid,kill!';
+            $this->output->writeln("<red>" . $msg . "</red>");
+            $this->log->error($msg);
+
             return false;
         }
     }
@@ -240,6 +274,8 @@ class Websocket
 
         $this->output->writeln('<red>more information please to see: http://doc.baiyf.com</red>');
         $this->output->writeln('');
+
+        $this->log->error('command error');
         exit();
     }
 
@@ -258,6 +294,8 @@ class Websocket
         $this->server->on('close', [$this, 'onClose']);
 
         $this->display();
+
+        $this->log->info('server start and bind ' . $this->config['port'] . ' with worker ' . $this->config['server']['worker_num']);
 
         $this->server->start();
     }

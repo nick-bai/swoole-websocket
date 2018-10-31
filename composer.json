@@ -1,6 +1,7 @@
 {
     "require": {
-        "inhere/console": "^2.4"
+        "inhere/console": "^2.4",
+        "monolog/monolog": "^1.23"
     },
     "autoload": {
         "psr-4": {

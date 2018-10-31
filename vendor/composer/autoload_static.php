@@ -16,6 +16,14 @@ class ComposerStaticInit706de157fddc5c0c6c92a0c791f7f4e1
             'Toolkit\\Sys\\' => 12,
             'Toolkit\\Cli\\' => 12,
         ),
+        'P' => 
+        array (
+            'Psr\\Log\\' => 8,
+        ),
+        'M' => 
+        array (
+            'Monolog\\' => 8,
+        ),
         'I' => 
         array (
             'Inhere\\Console\\' => 15,
@@ -34,6 +42,14 @@ class ComposerStaticInit706de157fddc5c0c6c92a0c791f7f4e1
         'Toolkit\\Cli\\' => 
         array (
             0 => __DIR__ . '/..' . '/toolkit/cli-utils/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
         'Inhere\\Console\\' => 
         array (
