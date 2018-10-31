@@ -1,0 +1,18 @@
+
+### OSX template
+*.DS_Store
+
+.idea/
+.phpintel/
+caches/
+vendor/
+!README.md
+!.gitkeep
+composer.lock
+*.log
+*.swp
+*.swo
+*.zip
+*.phar
+.DS_Store
+.interactive_history

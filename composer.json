@@ -1,0 +1,10 @@
+{
+    "require": {
+        "inhere/console": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "whisper\\" : "src/"
+        }
+    }
+}
